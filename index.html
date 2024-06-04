@@ -14,34 +14,79 @@
 </head>
 <body>
     <header>
-        <h1>Data Fusion Contest 2023</h1>
+        <h1>Data Fusion Adversarial Contest 2023</h1>
     </header>
     <main>
         <section>
-            <h2>Overview</h2>
-            <img src="images/Legend.png" alt="Overview Image" class="overview-image">
+            <h2>Contest legeng</h2>
+            
             <p>A key feature of the Data Fusion Contest 2023 is its tournament format. There are 2 closely related tasks in the competition: Attack and Defense. You can participate in either of them, including both tasks at once. Both tasks are based on common inputs and materials:</p>
-            <p>In both tasks, the same dataset of transactions with markup is used;</p>
-            <p>The competition uses only one attack mechanism through data input distortion;</p>
-            <p>The attack model is both the target in the Attack task and the starting point in the Defense task;</p>
-            <p>Both tasks deal with binary classification models of the same target variable (credit default risk).</p>
-            <p>Despite the similarity in materials, both tasks have fundamental differences:</p>
+            <img src="images/Legend_eng.png" alt="Overview Image" class="overview-image">
+            <ol>
+                <li>In both tasks, the same dataset of transactions with target (default 90_12) is used;</li>
+                <li>The competition uses only one attack mechanism: input data corruption. It is assumed that you modify the data that will be used in the output stage;</li>
+                <li>The attack model is both the target in the Attack task and the starting point in the Defense task;</li>
+                <li>Both tasks deal with binary classification models of the same target variable (credit default risk).</li>
+                <li>Despite the similarity in materials, both tasks have fundamental differences:</li>
+            </ol>
             <ul>
-                <li><strong>Solution format:</strong> in the Attack task, the format is .csv files; in the Defense task, it is archives with models and code;</li>
+                <li><strong>Solution format:</strong> in the Attack task, the format -  .csv files; in the Defense task, it is archives with models and code;</li>
                 <li><strong>Metrics:</strong> in the Attack task, the difference in ROC-AUC relative to the attacked model is calculated; in the Defense task, the harmonic mean of ROC-AUC on the original and attacked data is calculated;</li>
                 <li><strong>Approaches:</strong> finding the best edits in different families of models versus increasing model robustness.</li>
             </ul>
             <!-- Add more content as needed -->
         </section>
         <section>
-            <h2>Competition Details</h2>
-            <p>Key features of the Data Fusion Contest 2023 are its tournament format...</p>
-            <!-- Add more content as needed -->
+            <h2>Tournament</h2>
+            <p>If we were talking about the usual competition format, the participants of each task competed primarily with the organizers' materials:</p>
+            <ul>
+                <li><strong>In the Attack task:</strong> prepared attacks only against the organizers' pre-prepared model;</li>
+                <li><strong>In the Defense task:</strong> defended the models against attacks prepared in advance by the organizers.</li>
+            </ul>
+            <p>In order for participants to compete against <strong>each other</strong>, tournaments are organized in the event:</p>
+            <img src="images/Tasks_eng.png" alt="Overview Image" class="overview-image">
+            <p>The essence of tournaments is that the best solutions to both problems are run against each other:</p>
+            <ul>
+                <li>Solutions of the Attack task now attack solutions from the Protect task instead of the Organizer model;</li>
+                <li>Solutions of the Defense problem now run on solutions from the Attack problem instead of the organizers' attacks;</li>
+                <li><strong>There will be 2 tournaments:</strong> an intermediate tournament in the middle of the competition and a final tournament at the end of the competition;</li>
+                <li><strong>All prize money is awarded according to the results of the tournaments.</strong></li>
+            </ul>
+            <p>Separate new datasets will be used for tournaments, similar to how solutions are run on private test data. The data will have the same format and size so that the solutions to the Defense problem will work correctly on the solutions to the Attack problem on the new data. </p>
+        </section>
+
+        <section>
+            <h2>Tournament Rules</h2>
+            <p>So that the tournaments can be held in a reasonable amount of time, the 10 teams with the best results on the leaderboards of each task are selected to participate in the tournaments. The conduct of the tournament is as follows:.</p>
+            <ol>
+                <li>Ten teams from each problem are selected for the tournaments (total of 20 teams);</li>
+                <li>Two solutions from each selected team participate (total 40 solutions);</li>
+                <li>Each solution of one task is run against each solution of the second task (total 20*20 = 400 runs);</li>
+                <li>For each solution, the same metrics are counted as in that solution's task: the ROC-AUC difference for Attack and the harmonic mean ROC-AUC for Defense;</li>
+                <li>For each team's solution, the result of that solution is the normal average of the 20 runs against all solutions of the opposing task;</li>
+                <li>Each team's final result is the best of their two solutions;</li>
+                <li>After the end of each tournament, each task publishes a new leaderboard with the tournament results of those who participated in it: a separate leaderboard in the Attack task (with 10 tournament participants from the Attack task) and a separate leaderboard in the Defense task (with 10 tournament participants from the Defense task);</li>
+                <li>Based on the results of the first Tournament, a correction for “self-shooting” has been introduced. If the same team participates in the Tournament from both tasks, the results of both solutions on matched pairs are not taken into account when calculating the average result of these solutions (point 5). </li>
+            </ol>
+        </section>
+        <section>
+            <h2>How to get to the tournament</h2>
+            <p>Two conditions must be met to qualify for the tournament:</p>
+            <ul>
+                <li><strong>(general)</strong> Your team is in the top 10 on the leaderboard used for tournament selection. For the intermediate tournament this is the top-10 on the public leaderboard as of 06.03.2023 0:00 (Moscow time). For the final tournament it is the top-10 on the private leaderboard as of 03.04.2023 12:00 (Moscow time);</li>
+                <li><strong>(only for the Attack task)</strong> If your team is in the top 10, you need to run the selected solutions on the new tournament data. The data will be transmitted directly by the organizer's representatives. It is necessary to run the solutions and transfer the result within 24 hours. <strong>This must be done in both tournaments.</strong></strong></li>
+            </ul>
+            <p>No further action is required on the part of the participants in the Protection task.</p>
+        </section>
+        <section>
+            <h2>Contest timeline</h2>
+            <p>The overall competition and tournament timeline is as follows:</p>
+            <img src="images/Timeline_eng.png" alt="Overview Image" class="overview-image">
         </section>
         <!-- Add additional sections as needed -->
     </main>
     <footer>
-        <p>&copy; 2023 Data Fusion Contest</p>
+        <p>&copy; Data Fusion Adversarial Contest 2023</p>
     </footer>
 </body>
 </html>
