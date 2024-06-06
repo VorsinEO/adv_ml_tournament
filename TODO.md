@@ -22,8 +22,11 @@ https://github.com/shuishida/minerl_2022
 Сайт навигация
 * Paper Overview
 * DONE Contest Overview
-* WIP Contest Attack/Defence detail
-* Contest dataset overview
+* DONE Contest Attack/Defence detail
+* WIP Contest dataset overview
+    * DONE common data desc
+    * WIP specific for attack/def
+    * WIP how data was prepare with image from tg 
 * Attack Leaderboard/ Defense leaderboard
 * Code from paper (куда этот блок лучше)
 

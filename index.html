@@ -84,22 +84,116 @@
             <img src="images/Timeline_eng.png" alt="Overview Image" class="overview-image">
         </section>
         <section>
-            <h1>Attack task</h2>
-            <p>Desc...</p>
+            <h1>Attack task</h1>
+                <p>Somehow you have at your disposal a bank classification model that predicts customer default. It is a recurrent neural network that takes as input the last 300 customer transactions and a binary classification of customers. You do not have access to the full dataset on which the model was trained, but you do have a small, labelled sample of customers with accompanying materials.</p>
+                <p>Moreover, you even more mysteriously have the ability to partially modify the transaction data that this model will receive as input. Your task is to take an unmapped file with client transactions and make attacking changes to it, satisfying a number of constraints </p>    
             <ul>
-                <li><strong>(general)</strong> Your team is in the top 10 on the leaderboard used for tournament selection. For the intermediate tournament this is the top-10 on the public leaderboard as of 06.03.2023 0:00 (Moscow time). For the final tournament it is the top-10 on the private leaderboard as of 03.04.2023 12:00 (Moscow time);</li>
-                <li><strong>(only for the Attack task)</strong> If your team is in the top 10, you need to run the selected solutions on the new tournament data. The data will be transmitted directly by the organizer's representatives. It is necessary to run the solutions and transfer the result within 24 hours. <strong>This must be done in both tournaments.</strong></strong></li>
-            </ul>
-            <p>No further action is required on the part of the participants in the Protection task.</p>
+                <li><strong>Budget:</strong> you can change a maximum of 10 transactions per client. You can change all 10 transactions or a smaller number of transactions;</li>
+                <li><strong>Targets:</strong> you can change the MCC codes and amount of each transaction, either together or separately, but you cannot change anything else. You cannot delete transactions, or add new ones;</li>
+                <li><strong>Limits:</strong>After you make a change, the amount in each modified transaction must be within a predetermined range between the minimum and maximum of the corresponding MCC code.</li>
+            </ul>    
         </section>
         <section>
-            <h2>Attack task det </h2>
-            <p>Desc...</p>
+            <h2>Solution format </h2>
+            <p>You need to create an algorithm capable of creating a new tabular <strong>.csv</strong> file by transaction sequence that will change the predictions in the model given to you. </p>
+            <p>This is a tabular competition with the markup of the <strong>.csv</strong> file provided to you. The leaderboards of the competition will be used to qualify (select) for tournaments. Before each of the tournaments, successful qualifiers (top 10 on the leaderboard) will have 24 hours to run their selected solutions on new tournament test files that will be provided to them directly by the organisers. </p>
+        </section>
+        <section>
+            <h2>Verification of solutions</h2>
             <ul>
-                <li><strong>(general)</strong> Your team is in the top 10 on the leaderboard used for tournament selection. For the intermediate tournament this is the top-10 on the public leaderboard as of 06.03.2023 0:00 (Moscow time). For the final tournament it is the top-10 on the private leaderboard as of 03.04.2023 12:00 (Moscow time);</li>
-                <li><strong>(only for the Attack task)</strong> If your team is in the top 10, you need to run the selected solutions on the new tournament data. The data will be transmitted directly by the organizer's representatives. It is necessary to run the solutions and transfer the result within 24 hours. <strong>This must be done in both tournaments.</strong></strong></li>
+                <li>Solutions are checked automatically. First, your solutions are validated against the constraints. After successfully passing the validation, your solution is used to run the model provided to you on the attacked data. </li>
+                <li>The competition metric is the  <strong>ROC-AUC Diff</strong>  between the result of the model on the original data and its result on your solution. </li>
+                <li>The public/private ratio in the competition is 50/50. Winners of the competition are determined based on the results of participation in tournaments. Selection for the intermediate tournament is based on the results on the public leaderboard, and for the final tournament - on the private leaderboard. </li>
             </ul>
-            <p>No further action is required on the part of the participants in the Protection task.</p>
+        </section>
+        <section>
+            <h2>Attack metric</h2>
+            <p>The quality will be assessed using the difference in ROC-AUC:</p>
+            <p><strong>ROC-AUC Diff = ROC-AUC original - ROC-AUC attacked</strong></p>
+            <p>The higher this metric, the more effective your attack on the model. The meaning of the metric:</p>
+            <ul>
+                <li>It is the damage to the ROC-AUC metric inflicted by your edits to the data…</li>
+                <li>...for the model run on this data…</li>
+                <li>...compared to the original data, if there was no attack.</li>
+            </ul>
+        </section> 
+        <!--  DEFENCE  -->
+        <section>
+            <h1>Defence task</h1>
+                <p>As in the Attack problem, you have at your disposal a bank RNN binary classification model predicting customer default. You do not have access to the full amount of data on which the model was trained. However, you do have a small marked-up sample of customers with accompanying materials. And you know exactly what format this model will be attacked in - changing the small number of transactions fed to the model as input.</p>
+                <p>Now your task is to build a good model for the same classification task, while making it secure against such vulnerabilities. It is not in your power to prevent data hacking, but it is entirely within your power to try to protect the model from such troubles.</p>        
+        </section>
+        <section>
+            <h2>Solution format </h2>
+            <p>You need to build a classifier model using an existing banking model and the marked-up transaction data provided to you, in a code container format. Specifically, using the transaction data, train a model that uses information about the last 300 transactions to binary classify customers. </p>
+            <p>This is a container competition with preparation of solutions in the form of an archive with code, which will be autonomously run on closed test data. The leaderboards of the competition will be used for qualification (selection) for the tournaments. Since the format is containerised, the selection for each of the tournaments is automatic, for participants in the first 10 places at the moment of qualification for the tournament. Qualification for the intermediate tournament is done on the public part of the leaderboard; qualification for the final tournament is done on the private part.</p>
+        </section>
+        <section>
+            <h2>Verification of solutions</h2>
+            <ul>
+                <li>Solutions are tested automatically. The launch takes place in an isolated environment with no internet access on fully closed test data that is not shared with the participants. </li>
+                <li>In both the public and private parts of the ranking, solutions are run on two sets of inputs: raw transactions, and raw transactions with attacks prepared in advance by the organisers that satisfy the requirements and constraints for the Attack task. </li>
+                <li>The ratio of public/private in the competition is 50/50. The winners of the competition are determined by the results of participation in tournaments. Selection for the intermediate tournament is based on the results on the public leaderboard, and for the final tournament - on the private leaderboard. </li>
+                <li>The competition metric is <strong>Mean Harm ROC-AUC</strong>. It is the Mean Harmonic <strong>ROC-AUC</strong> on the original data and on the attacked data. The metric combines a trade-off between increasing the defensibility of the model and potentially decreasing its quality.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Defence metric</h2>
+            <p>The quality will be evaluated using the harmonic mean of two ROC-AUC:</p>
+            <p><strong>Mean Harm ROC-AUC = 2 / (1 / ROC-AUC original + 1 / ROC-AUC attacked)</strong></p>
+            <p>The purpose of the metric is to account for the trade-off between increasing the model&#39;s security, by calculating the ROC-AUC on the attacked data, and the potential decrease in the model&#39;s quality, by calculating the ROC-AUC on the original data without attacks.</p>
+        </section>
+        <!--  DATA  --> 
+        <section>
+            <h1>Data description </h1>
+            <p>Participants have access to several data sets and artifacts used in both tasks:</p>
+            <ol>
+                <li>Training data of client transactions in table <strong><code>.csv</code></strong> format: <a href="https://storage.yandexcloud.net/ds-ods/files/materials/c7b69754/transactions.zip"><strong><code>transactions.zip</code></strong></a> (<strong>27 MB</strong>)</li>
+                <li>The target variable for training data <a href="https://storage.yandexcloud.net/ds-ods/files/materials/a4faa80b/train_target.zip"><strong><code>train_target.csv</code></strong></a> (<strong>27 KB</strong>)</li>
+                <li>Provided RNN binary classifier model in pickle format <a href="https://storage.yandexcloud.net/ds-ods/files/materials/750fd067/model.zip"><strong><code>model.zip</code></strong></a> (<strong>1 MB</strong>)</li>
+            </ol>
+            <p>Supporting data for working with data:</p>
+            <ol>
+                <li>Dictionary with decryption of MCC transaction codes <a href="https://storage.yandexcloud.net/ds-ods/files/materials/a93abd22/mcc_codes.csv"><strong><code>mcc_codes.csv</code></strong></a> (<strong>0.2 MB</strong>)</li>
+                <li>Dictionary with decryption of transaction currency codes <a href="https://storage.yandexcloud.net/ds-ods/files/materials/420d4b9c/currency_rk.csv"><strong><code>currency_rk.csv</code></strong></a> (<strong>1 KB</strong>)</li>
+            </ol>
+            <p>Description of transaction attributes:</p>
+
+            <ul>
+                <li><strong><code>user_id</code></strong> - Bank customer ID</li>
+                <li><strong><code>mcc_code</code></strong> - mcc code of the transaction, description in mcc_codes.csv</li>
+                <li><strong><code>currency_rk</code></strong> - transaction currency, decryption in currency_rk.csv</li>
+                <li><strong><code>transaction_amt</code></strong> - amount in transaction currency</li>
+                <li><strong><code>transaction_dttm</code></strong> - date and time of the transaction</li>
+            </ul>
+            
+        </section>
+        <section>
+            <h2>Specific materials for attack task</h2>
+        </section>
+        <section>
+            <h2>Specific materials for defence task</h2>
+        </section>
+        <section>
+            <h2>How datasets organized in general</h2>
+        </section>
+        <!--  LINKS  --> 
+        <section>
+            <h1>Useful papers </h1>
+            <p>The topic of attacking and defending machine learning models in applications is just starting to develop now. To inspire you with approaches and ideas, we would like to share with you the most interesting articles on the topic, selected during the preparation of the competition:</p>
+            <ul>
+                <li><a href="https://arxiv.org/abs/2205.01714"><strong>[Arxiv, 3 May 2022]</strong></a> Don&#39;t sweat the small stuff, classify the rest: Sample Shielding to protect text classifiers against adversarial attacks, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Rusert%2C+J">Jonathan Rusert</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Srinivasan%2C+P">Padmini Srinivasan</a></li>
+                <li><a href="https://arxiv.org/abs/2106.08361">[Arxiv, 15 Jun 2021]</a> <em></em>Adversarial Attacks on Deep Models for Financial Transaction Records, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Fursov%2C+I">Ivan Fursov</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Morozov%2C+M">Matvey Morozov</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Kaploukhaya%2C+N">Nina Kaploukhaya</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Kovtun%2C+E">Elizaveta Kovtun</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Rivera-Castro%2C+R">Rodrigo Rivera-Castro</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Gusev%2C+G">Gleb Gusev</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Babaev%2C+D">Dmitry Babaev</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Kireev%2C+I">Ivan Kireev</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Zaytsev%2C+A">Alexey Zaytsev</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Burnaev%2C+E">Evgeny Burnaev</a></li>
+                <li><a href="https://arxiv.org/abs/1901.09963"><strong>[Arxiv, 20 Nov 2019]</strong></a> Defense Methods Against Adversarial Examples for Recurrent Neural Networks, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Rosenberg%2C+I">Ishai Rosenberg</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Shabtai%2C+A">Asaf Shabtai</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Elovici%2C+Y">Yuval Elovici</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Rokach%2C+L">Lior Rokach</a></li>
+                <li><a href="https://arxiv.org/abs/1604.08275"><strong>[Arxiv, 8 Apr 2016]</strong></a> Crafting Adversarial Input Sequences for Recurrent Neural Networks, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Papernot%2C+N">Nicolas Papernot</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=McDaniel%2C+P">Patrick McDaniel</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Swami%2C+A">Ananthram Swami</a>, <a href="https://arxiv.org/search/cs?searchtype=author&amp;query=Harang%2C+R">Richard Harang</a></li>
+                <li><a href="https://spiral.imperial.ac.uk/handle/10044/1/96749"><strong>[ICL Thesis, October 2021]</strong></a> Robustness against adversarial attacks on deep neural networks, Liu Yi-Ling</li>
+            </ul>    
+        
+        </section>
+        <section>
+            <h2>Solution format </h2>
+            <p>You need to create an algorithm capable of creating a new tabular <strong>.csv</strong> file by transaction sequence that will change the predictions in the model given to you. </p>
+            <p>This is a tabular competition with the markup of the <strong>.csv</strong> file provided to you. The leaderboards of the competition will be used to qualify (select) for tournaments. Before each of the tournaments, successful qualifiers (top 10 on the leaderboard) will have 24 hours to run their selected solutions on new tournament test files that will be provided to them directly by the organisers. </p>
         </section>    
     </main>
     <footer>
