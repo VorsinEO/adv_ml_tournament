@@ -53,6 +53,7 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
 }
 
 .left-nav {
@@ -106,6 +107,8 @@ nav .h2-item {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
     }
 
     .content {
