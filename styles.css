@@ -46,3 +46,69 @@ footer {
     width: 100%;
     bottom: 0;
 }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.left-nav {
+    width: 200px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.content {
+    margin-left: 220px; /* Adjust according to the width of the left sidebar */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    margin: 5px 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9em; /* Reduce font size for navigation */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav .h1-item {
+    font-weight: bold;
+}
+
+nav .h2-item {
+    margin-left: 20px;
+}
+
+/* Responsive behavior */
+@media screen and (max-width: 768px) {
+    .left-nav {
+        position: static;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}

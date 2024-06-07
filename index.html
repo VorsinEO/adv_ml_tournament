@@ -16,9 +16,13 @@
     <header>
         <h1>Data Fusion Adversarial Contest 2023</h1>
     </header>
+    <div class="container">
+    <nav id="dynamic-nav" class="left-nav"></nav>
+
+    <div class="content">
     <main>
         <section>
-            <h1>Contest legeng</h1>
+            <h1 >Contest legeng</h1>
             
             <p>A key feature of the Data Fusion Contest 2023 is its tournament format. There are 2 closely related tasks in the competition: Attack and Defense. You can participate in either of them, including both tasks at once. Both tasks are based on common inputs and materials:</p>
             <img src="images/Legend_eng.png" alt="Overview Image" class="overview-image">
@@ -34,10 +38,12 @@
                 <li><strong>Metrics:</strong> in the Attack task, the difference in ROC-AUC relative to the attacked model is calculated; in the Defense task, the harmonic mean of ROC-AUC on the original and attacked data is calculated;</li>
                 <li><strong>Approaches:</strong> finding the best edits in different families of models versus increasing model robustness.</li>
             </ul>
-            <!-- Add more content as needed -->
+            
         </section>
+
+        <!--  Tournament -->
         <section>
-            <h1>Tournament</h1>
+            <h1 id="section2">Tournament</h1>
             <p>If we were talking about the usual competition format, the participants of each task competed primarily with the organizers' materials:</p>
             <ul>
                 <li><strong>In the Attack task:</strong> prepared attacks only against the organizers' pre-prepared model;</li>
@@ -56,7 +62,7 @@
         </section>
 
         <section>
-            <h2>Tournament Rules</h2>
+            <h2 id="subsection2-1">Tournament Rules</h2>
             <p>So that the tournaments can be held in a reasonable amount of time, the 10 teams with the best results on the leaderboards of each task are selected to participate in the tournaments. The conduct of the tournament is as follows:.</p>
             <ol>
                 <li>Ten teams from each problem are selected for the tournaments (total of 20 teams);</li>
@@ -83,6 +89,13 @@
             <p>The overall competition and tournament timeline is as follows:</p>
             <img src="images/Timeline_eng.png" alt="Overview Image" class="overview-image">
         </section>
+        <section>
+            <h2>Final leaderboard Attack (Tournament phase 2)</h2>
+        </section>
+        <section>
+            <h2>Final leaderboard Defence (Tournament phase 2)</h2>
+        </section>
+        <!--  Attack task-->
         <section>
             <h1>Attack task</h1>
                 <p>Somehow you have at your disposal a bank classification model that predicts customer default. It is a recurrent neural network that takes as input the last 300 customer transactions and a binary classification of customers. You do not have access to the full dataset on which the model was trained, but you do have a small, labelled sample of customers with accompanying materials.</p>
@@ -145,14 +158,14 @@
         </section>
         <!--  DATA  --> 
         <section>
-            <h1>Data description </h1>
+            <h1>Data </h1>
             <p>Participants have access to several data sets and artifacts used in both tasks:</p>
             <ol>
                 <li>Training data of client transactions in table <strong><code>.csv</code></strong> format: <a href="https://storage.yandexcloud.net/ds-ods/files/materials/c7b69754/transactions.zip"><strong><code>transactions.zip</code></strong></a> (<strong>27 MB</strong>)</li>
                 <li>The target variable for training data <a href="https://storage.yandexcloud.net/ds-ods/files/materials/a4faa80b/train_target.zip"><strong><code>train_target.csv</code></strong></a> (<strong>27 KB</strong>)</li>
                 <li>Provided RNN binary classifier model in pickle format <a href="https://storage.yandexcloud.net/ds-ods/files/materials/750fd067/model.zip"><strong><code>model.zip</code></strong></a> (<strong>1 MB</strong>)</li>
             </ol>
-            <p>Supporting data for working with data:</p>
+            <p>Supporting information for working with data:</p>
             <ol>
                 <li>Dictionary with decryption of MCC transaction codes <a href="https://storage.yandexcloud.net/ds-ods/files/materials/a93abd22/mcc_codes.csv"><strong><code>mcc_codes.csv</code></strong></a> (<strong>0.2 MB</strong>)</li>
                 <li>Dictionary with decryption of transaction currency codes <a href="https://storage.yandexcloud.net/ds-ods/files/materials/420d4b9c/currency_rk.csv"><strong><code>currency_rk.csv</code></strong></a> (<strong>1 KB</strong>)</li>
@@ -166,16 +179,50 @@
                 <li><strong><code>transaction_amt</code></strong> - amount in transaction currency</li>
                 <li><strong><code>transaction_dttm</code></strong> - date and time of the transaction</li>
             </ul>
+            <p>MCC (Merchant Category Code) is a four-digit number assigned to a business by credit card companies when the business first starts accepting credit cards as a form of payment. MCC codes are used to classify the business by the type of goods or services it provides. For example, a restaurant might have an MCC code of 5812, while a bookstore might have an MCC code of 5943. These codes are used in transaction data to categorize and track spending patterns.</p>
             
+            <h3>Target variable  - default</h3>
+            <p>"Default 90 12" in credit risk typically refers to a measure of delinquency in the context of credit risk analysis. It signifies an account that is 90 days or more past due, indicating a higher level of credit risk associated with the borrower's ability to repay their debt.</p>
+
         </section>
         <section>
             <h2>Specific materials for attack task</h2>
+            <ol>
+                <li>Unlabeled test data for the attack <a href="https://storage.yandexcloud.net/ds-ods/files/materials/b29ad02f/sample_submission.csv"><strong><code>sample_submission.csv</code></strong></a> (5<strong>7 MB</strong>)</li>
+                <li>File with limits on changed transaction amounts by MCC codes <a href="https://storage.yandexcloud.net/ds-ods/files/materials/4892996d/quantiles.json"><strong><code>quantiles.json</code></strong></a> (<strong>32 KB</strong>)</li>
+                <li>Example of naive baseline solution <a href="https://storage.yandexcloud.net/ds-ods/files/materials/84cae236/naive_submission.csv"><strong><code>naive_submission.csv</code></strong></a> (<strong>55 MB</strong>)</li>
+                <li>Archive with the code of the naive baseline solution for reproduction by participants <a href="https://storage.yandexcloud.net/ds-ods/files/materials/716295e0/naive_baseline.zip"><strong><code>naive_baseline.zip</code></strong></a> (<strong>1 MB</strong>)</li>
+            </ol>
+                
         </section>
         <section>
             <h2>Specific materials for defence task</h2>
+            <ol>
+                <li>Example solution <a href="https://storage.yandexcloud.net/ds-ods/files/materials/0e0f849c/sample_submission.zip"><strong><code>sample_submission.zip</code></strong></a> (<strong>1 MB</strong>)</li>
+                <li>Example solution <a href="https://storage.yandexcloud.net/ds-ods/files/materials/3e467885/submit_defence.zip"><strong><code>submit_defence.zip</code></strong></a> (<strong>1 MB</strong>)</li>
+            </ol>
         </section>
         <section>
             <h2>How datasets organized in general</h2>
+            <p>The information may be useful to those who wish to organize a similar benchmark or competition in the future.</p>
+            <p>From the materials, it is clear that there was a multi-level competition Attack, Defense, tournaments. Leaderboards were allocated for the public/private parts, plus it was necessary to prepare a model and pass it on to the participants. This required careful approach to data splitting.</p>
+            <p>The scheme below shows the overall structure from the point of view of organization and data splitting.</p>
+            <img src="images/data_splt.png" alt="Overview Image" class="overview-image">
+            <p>Brief description:</p>
+            <ul>
+                <li>We have <strong>All data</strong> - clients and transactions with targets.</li>
+                <li>Approximately half is removed for training the basic model <strong>Used for train basic model</strong></li>
+                <li>Part of the markup is <strong>given</strong> to participants for retraining the model</li>
+                <li>The rest of the data is divided into three parts for the tasks of attack, defense, and tournaments.</li>
+            </ul>
+            <p>It is important to note</p>
+            <ul>
+                <li>Participants only received those pieces from the scheme that start with the word <strong>Given</strong></li>
+                <li>The rest of the data was not passed on to the participants and was available to the organizers</li>
+                <li>Part of the data was only available to the best of the participants, not everyone (top 10 defense and attack teams) for tournaments</li>
+            </ul>
+            <p>P.S. Plus, before receiving the &#39;All Data&#39;, work was carried out on a larger set of clients and transactions to make the balance of classes a bit easier for modeling compared to the original (x→4%  share of the positive class).</p>
+
         </section>
         <!--  LINKS  --> 
         <section>
@@ -196,8 +243,12 @@
             <p>This is a tabular competition with the markup of the <strong>.csv</strong> file provided to you. The leaderboards of the competition will be used to qualify (select) for tournaments. Before each of the tournaments, successful qualifiers (top 10 on the leaderboard) will have 24 hours to run their selected solutions on new tournament test files that will be provided to them directly by the organisers. </p>
         </section>    
     </main>
+
+    </div>
+    </div>
     <footer>
         <p>&copy; Data Fusion Adversarial Contest 2023</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
